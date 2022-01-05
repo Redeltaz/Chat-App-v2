@@ -1,34 +1,45 @@
 import express from "express";
 import crudMessage from "../crud/crudMessage.js";
+import {
+    verifyToken
+} from "../../utils/token.js";
 
 const messagesRoute = express.Router();
 
 messagesRoute.get("/", async (req, res) => {
+    const decodedToken = verifyToken(req.headers.authorization);
+    if (!decodedToken) {
+        return res.status(400).json("A valid token is missing")
+    }
+
     try {
         const messages = await crudMessage.getMessageWithRelation();
 
-        res.send(messages);
+        res.json(messages);
     }
     catch (error) {
         console.log(error);
-        res.send("There was an error while retrieving all messages");
+        res.json("There was an error while retrieving all messages");
     }
 });
 
 messagesRoute.post("/", async (req, res) => {
+    const user = verifyToken(req.headers.authorization);
+    if (!user) {
+        return res.status(400).json("A valid token is missing")
+    }
+
     try {
-        // property decodedToken added in the middleware
-        const user = req.decodedToken;
         const { content } = req.body;
         
         const message = await crudMessage.post({content});
         const relation = await crudMessage.createMessageUserRelation(message, user);
 
-        return res.status(200).send(relation);
+        return res.status(200).json(relation);
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send("There was an error while retrieving all messages");
+        return res.status(400).json("There was an error while retrieving all messages");
     }
 });
 

@@ -6,7 +6,6 @@ import { objectToString } from "../../utils/parsing.js";
  */
 class CRUDBase {
     label;
-    session;
 
     constructor(label) {
         this.label = label;
@@ -57,6 +56,7 @@ class CRUDBase {
 
     async post(params) {
         const session = db.driver.session();
+        params.createdAt = new Date();
 
         try {
             const parsedParams = objectToString(params);

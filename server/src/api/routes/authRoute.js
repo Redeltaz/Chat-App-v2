@@ -16,24 +16,24 @@ authRoute.post("/login", async (req, res) => {
 
         let userDb = await crudUser.getByEmail(email);
 
-        if (!userDb) return res.status(404).send("There is no user with this email adress");
+        if (!userDb) return res.status(404).json("There is no user with this email adress");
 
         const isGoodPassword = await isSamePassword(password, userDb.password);
             
-        if(!isGoodPassword) return res.status(403).send("Wrong password");
+        if(!isGoodPassword) return res.status(403).json("Wrong password");
         
         delete userDb.password;
 
         const token = generateJWT(userDb);
         
-        return res.status(200).send({
+        return res.status(200).json({
             accessToken: token,
             user: userDb,
         });
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send("There was an error while retrieving all users");
+        return res.status(400).json("There was an error while retrieving all users");
     }
 });
 
@@ -48,17 +48,17 @@ authRoute.post("/register", async (req, res) => {
 
         let userDb = await crudUser.getByEmail(newUser.email);
 
-        if (userDb) return res.status(409).send("User with this email already exist");
+        if (userDb) return res.status(409).json("User with this email already exist");
         
         newUser.password = await hashPassword(password);
         userDb = await crudUser.post(newUser);
 
-        return res.status(200).send(userDb);
+        return res.status(200).json(userDb);
 
     }
     catch (error) {
         console.log(error);
-        return res.status(400).send("There was an error while retrieving this user");
+        return res.status(400).json("There was an error while retrieving this user");
     }
 });
 

@@ -25,3 +25,19 @@ export const decodeJWT = (token) => {
 
     return payload;
 };
+
+/**
+ * Verify the token and send back user info
+ */
+export const verifyToken = (authHeader) => {
+    const token = authHeader === "undefined" ? false : authHeader
+
+    if(!token) return false
+
+    const decodedToken = decodeJWT(token);
+    const { id, pseudo, email } = decodedToken;
+
+    if(!id || !pseudo || !email) return false
+
+    return decodedToken;
+};

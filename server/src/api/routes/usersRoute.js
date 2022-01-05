@@ -7,11 +7,11 @@ usersRoute.get("/", async (req, res) => {
     try {
         const users = await crudUser.getMulti();
 
-        res.send(users);
+        res.json(users);
     }
     catch (error) {
         console.log(error);
-        res.send("There was an error while retrieving all users");
+        res.json("There was an error while retrieving all users");
     }
 });
 
@@ -22,14 +22,14 @@ usersRoute.get("/:id", async (req, res) => {
         const user = await crudUser.get(id);
         
         if (user) { 
-            res.send(user);
+            res.json(user);
         }else {
-            res.status(404).send("There is no user with this id");
+            res.status(404).json("There is no user with this id");
         }
     }
     catch (error) {
         console.log(error);
-        res.send("There was an error while retrieving this user");
+        res.json("There was an error while retrieving this user");
     }
 });
 
