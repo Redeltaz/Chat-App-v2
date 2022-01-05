@@ -3,6 +3,7 @@ import {
 } from "../../utils/token.js";
 
 export const verifyToken = (req, res, next) => {
+    if(req.path === "/api/auth/login" || req.path === "/api/auth/register") return next();
     const token = req.headers?.authorization;
 
     if(!token) {
@@ -10,7 +11,14 @@ export const verifyToken = (req, res, next) => {
     }
 
     const decodedToken = decodeJWT(token);
-    console.log(decodedToken);
+    const { id, pseudo, email } = decodedToken;
 
-    next();
+    if(!id || !pseudo || !email) {
+        return res.status(403).send("Your token seems wrong");
+    }
+
+    // put user into request to get it on routes
+    req.decodedToken = decodedToken;
+
+    return next();
 };

@@ -76,7 +76,7 @@ class CRUDBase {
 
     async delete(id) {
         const session = db.driver.session();
-        
+
         try {
             const { records } = await session.run(`MATCH (n:${this.label}) WHERE n.id = ${id} DETACH DELETE n RETURN n`);
             session.close();

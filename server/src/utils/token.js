@@ -5,7 +5,6 @@ dotenv.config();
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const JWT_ALGORITHM = process.env.JWT_ALGORITHM;
-const JWT_EXPIRE = parseInt(process.env.JWT_EXPIRE);
 
 /**
  * Generate JWT
@@ -13,7 +12,6 @@ const JWT_EXPIRE = parseInt(process.env.JWT_EXPIRE);
 export const generateJWT = (payload) => {
     const token = jwt.sign(payload, JWT_SECRET_KEY, {
         algorithm: JWT_ALGORITHM,
-        expiresIn: JWT_EXPIRE,
     });
     
     return token;
