@@ -1,0 +1,39 @@
+import neo4j from "neo4j-driver";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const DB_HOST = process.env.DB_HOST;
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+
+class Database {
+    driver;
+    _authToken;
+
+    _dbHost;
+    _dbUsername;
+    _dbPassword;
+
+    constructor(host, username, password) {
+        this._dbHost = host;
+        this._dbUsername = username;
+        this._dbPassword = password;
+
+        this._authToken = neo4j.auth.basic(this._dbUsername, this._dbPassword);
+
+        this._openConnection();
+    }
+
+    _openConnection() {
+        this.driver = neo4j.driver(this._dbHost, this._authToken);
+    }
+}
+
+const db = new Database(
+    DB_HOST,
+    DB_USERNAME,
+    DB_PASSWORD
+);
+
+export default db;
