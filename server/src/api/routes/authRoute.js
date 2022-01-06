@@ -16,6 +16,8 @@ authRoute.post("/login", async (req, res) => {
 
         let userDb = await crudUser.getByEmail(email);
 
+        console.log(userDb);
+
         if (!userDb) return res.status(404).json("There is no user with this email adress");
 
         const isGoodPassword = await isSamePassword(password, userDb.password);
@@ -47,6 +49,7 @@ authRoute.post("/register", async (req, res) => {
         };
 
         let userDb = await crudUser.getByEmail(newUser.email);
+        console.log(userDb)
 
         if (userDb) return res.status(409).json("User with this email already exist");
         

@@ -1,0 +1,54 @@
+.header {
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(179, 179, 179);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.header .logout {
+    cursor: pointer;
+    background-color: rgb(238, 42, 42);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.chats {
+    padding: 80px 100px 100px 100px;
+}
+
+.chats li {
+    list-style-type: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px 0;
+    color: white;
+}
+
+.chat-bar {
+    background-color: rgb(179, 179, 179);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.chat-bar input[type=text] {
+    width: 400px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.chat-bar input[type=submit] {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-left: 10px;
+}

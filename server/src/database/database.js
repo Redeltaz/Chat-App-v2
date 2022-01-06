@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const DB_HOST = process.env.DB_HOST;
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_HOST = String(process.env.DB_HOST);
+const DB_USERNAME = String(process.env.DB_USERNAME);
+const DB_PASSWORD = String(process.env.DB_PASSWORD);
 
 class Database {
     driver;
@@ -26,6 +26,9 @@ class Database {
     }
 
     _openConnection() {
+        console.log(DB_HOST)
+        console.log(DB_USERNAME)
+        console.log(DB_PASSWORD)
         this.driver = neo4j.driver(this._dbHost, this._authToken);
     }
 }

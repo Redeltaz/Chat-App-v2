@@ -1,0 +1,7 @@
+.env
+.env.example
+.eslintrc.js
+.gitignore
+.git
+node_module
+README.md

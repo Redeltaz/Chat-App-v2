@@ -57,11 +57,12 @@ const Register = () => {
 
     return (
         <div className="register">
+            <h1>Register</h1>
             <form onSubmit={register}>
-                <input required type="text" value={pseudo} onChange={(event) => setPseudo(event.target.value)} />
-                <input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                <input required type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                <input required placeholder="pseudo" type="text" value={pseudo} onChange={(event) => setPseudo(event.target.value)} />
+                <input required placeholder="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                <input required placeholder="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                <input required placeholder="confirm password" type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
                 <input type="submit" value="Register" />
                 <Link to="/login">Login</Link>
             </form>

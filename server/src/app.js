@@ -15,7 +15,7 @@ const PORT = parseInt(process.env.API_PORT) || 3000;
 
 const app = express();
 const server = http.createServer(app);
-export const io = new Server(server, {
+const io = new Server(server, {
     cors: {
         origin: "*",
     }

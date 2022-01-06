@@ -50,9 +50,10 @@ const Login = () => {
 
     return (
         <div className="login">
+            <h1>Login</h1>
             <form onSubmit={login}>
-                <input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-                <input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                <input required placeholder="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+                <input required placeholder="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
                 <input type="submit" value="Login" />
                 <p>You don't have an account ? <Link to="/register">Register</Link></p>
             </form>

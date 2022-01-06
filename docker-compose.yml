@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  back:
+    build: 
+      context: ./server
+    ports:
+      - "8000:8000"
+    environment:
+      - API_PORT=8000
+      - DB_HOST=bolt://database:7687
+      - DB_USERNAME=neo4j
+      - DB_PASSWORD=password
+      - SALT=9517934591576864165397198526879312457678195745
+      - JWT_SECRET_KEY=xZ5eg+_kEgZBLQSUKf^ytU%dYH4?ADgn
+      - JWT_ALGORITHM=HS256
+    depends_on:
+      - database
+
+  front:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL="http://back:8000"
+    depends_on:
+      - back
+
+  database:
+    image: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - "/neo4j/data:/data"
+      - "/neo4j/logs:/logs"
+      - "/neo4j/import:/import"
+      - "/neo4j/plugins:/plugins"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+  

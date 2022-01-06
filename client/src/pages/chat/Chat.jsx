@@ -53,28 +53,47 @@ const Chat = () => {
         })
     }, [])
 
-    const sendMessage = () => {
-        socket.emit("chat", {newMessage, token});
+    useEffect(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    }, [messages])
 
+    const sendMessage = (event) => {
+        event.preventDefault();
+        socket.emit("chat", {newMessage, token});
+        
         setNewMessage("");
+    }
+
+    const logout = () => {
+        if(localStorage.getItem("token")) {
+            localStorage.removeItem("token");
+        }
+        if(localStorage.getItem("user")) {
+            localStorage.removeItem("user");
+        }
+
+        setIsLogged(false)
     }
 
   return (
     <div className="App">
         <div className="header">
             <p>Logged as <b>{user}</b></p>
+            <p onClick={logout} className="logout">Logout</p>
         </div>
-        <ul>
+        <ul className="chats">
             {messages.map((msg, index) => (
-                <li key={index}>
-                    <p>{msg.content}</p>
-                    <p>{msg.creator}</p>
-                    <p>{msg.createdAt}</p>
+                <li key={index} style={{backgroundColor: msg.creator === user ? "rgb(85, 85, 243)" : "grey"}}>
+                    <p>Content: <b>{msg.content}</b></p>
+                    <p>From: <b>{msg.creator}</b></p>
+                    <p>Date: <b>{msg.createdAt}</b></p>
                 </li>
             ))}
         </ul>
-        <input value={newMessage} onChange={(event) => setNewMessage(event.target.value)} type="text"/>
-        <button onClick={sendMessage}>Send</button>
+        <form onSubmit={sendMessage} className="chat-bar">
+            <input value={newMessage} placeholder="Your message..." onChange={(event) => setNewMessage(event.target.value)} type="text"/>
+            <input type="submit" value="Send" onClick={sendMessage} />
+        </form>
         {isLogged ? null: <Navigate to="/login" /> }
     </div>
   );

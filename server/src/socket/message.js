@@ -3,7 +3,7 @@ import {
     verifyToken
 } from "../utils/token.js";
 
-const socketEvent = (socket) => {
+const socketEvet = (socket) => {
     console.log("New user on the room");
 
     socket.on("disconnect", () => console.log("An user has disconnect"));
@@ -26,6 +26,6 @@ const socketEvent = (socket) => {
         socket.broadcast.emit("newMessage", relation);
         socket.emit("newMessage", relation);
     });
-};
+}
 
-export default socketEvent;
+export default socketEvet;
