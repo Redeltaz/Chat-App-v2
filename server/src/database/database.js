@@ -26,9 +26,6 @@ class Database {
     }
 
     _openConnection() {
-        console.log(DB_HOST)
-        console.log(DB_USERNAME)
-        console.log(DB_PASSWORD)
         this.driver = neo4j.driver(this._dbHost, this._authToken);
     }
 }

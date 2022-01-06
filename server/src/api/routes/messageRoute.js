@@ -8,6 +8,7 @@ const messagesRoute = express.Router();
 
 messagesRoute.get("/", async (req, res) => {
     const decodedToken = verifyToken(req.headers.authorization);
+    
     if (!decodedToken) {
         return res.status(400).json("A valid token is missing")
     }

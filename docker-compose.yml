@@ -22,8 +22,6 @@ services:
       context: ./client
     ports:
       - "3000:3000"
-    environment:
-      - REACT_APP_API_URL="http://back:8000"
     depends_on:
       - back
 
@@ -33,10 +31,10 @@ services:
       - "7474:7474"
       - "7687:7687"
     volumes:
-      - "/neo4j/data:/data"
-      - "/neo4j/logs:/logs"
-      - "/neo4j/import:/import"
-      - "/neo4j/plugins:/plugins"
+      - "./neo4j/data:/data"
+      - "./neo4j/logs:/logs"
+      - "./neo4j/import:/import"
+      - "./neo4j/plugins:/plugins"
     environment:
       - NEO4J_AUTH=neo4j/password
   

@@ -1,4 +1,4 @@
-# Chat-App Node, Expres, React, Neo4j
+# Chat-App Node, Express, React, Neo4j
 
 Chat App created for the week NodeJs in IIM.
 <br>

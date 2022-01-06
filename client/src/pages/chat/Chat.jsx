@@ -47,7 +47,6 @@ const Chat = () => {
 
     useEffect(() => {
         socket.on("newMessage", (content) => {
-            console.log("new message")
             const { message } = content
             setMessages(oldMsg => [...oldMsg, message])
         })

@@ -30,6 +30,7 @@ export const decodeJWT = (token) => {
  * Verify the token and send back user info
  */
 export const verifyToken = (authHeader) => {
+    
     const token = authHeader === "undefined" ? false : authHeader
 
     if(!token) return false
@@ -37,7 +38,7 @@ export const verifyToken = (authHeader) => {
     const decodedToken = decodeJWT(token);
     const { id, pseudo, email } = decodedToken;
 
-    if(!id || !pseudo || !email) return false
+    if((!id && id !== 0) || !pseudo || !email) return false
 
     return decodedToken;
 };
