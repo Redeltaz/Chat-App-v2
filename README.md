@@ -1,6 +1,5 @@
 # Chat-App Node, Express, React, Neo4j
 <br>
-<br>
 The stack used for the project is:
 - NodeJs for the server
 - Express for the API
