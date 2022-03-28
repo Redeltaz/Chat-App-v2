@@ -1,6 +1,5 @@
 # Chat-App Node, Express, React, Neo4j
-
-Chat App created for the week NodeJs in IIM.
+.
 <br>
 <br>
 The stack used for the project is:
